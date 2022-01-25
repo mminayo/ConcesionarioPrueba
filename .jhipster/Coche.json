@@ -1,0 +1,43 @@
+{
+  "fields": [
+    {
+      "fieldName": "marca",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modelo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "precio",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "numeroSerie",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "transpuesto",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "venta",
+      "otherEntityName": "venta",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "fecha"
+    }
+  ],
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Coche",
+  "changelogDate": "20220125083132"
+}

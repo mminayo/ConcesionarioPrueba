@@ -40,6 +40,8 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["es", "en"],
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "lastLiquibaseTimestamp": 1643099950000,
+    "entities": ["Cliente", "Coche", "Empleado", "Venta"]
   }
 }

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ConcesionarioPruebaApp<concesionario-prueba>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "y.ConcesionarioPruebaApp",
+            "projectName": "concesionario-prueba",
+            "args": ""
+        }
+    ]
+}
