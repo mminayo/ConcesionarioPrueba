@@ -63,13 +63,15 @@ export class CocheComponent implements OnInit {
       this.cocheService.findByColor(this.colorBusqueda).subscribe({
         next: (res: HttpResponse<ICoche[]>) => {
           this.isLoading = false;
-          this.onSuccess(res.body, res.headers, 1, false);
+          this.coches = res.body ?? [];
         },
         error: () => {
           this.isLoading = false;
           this.onError();
         },
       });
+    } else {
+      this.loadPage();
     }
   }
 
