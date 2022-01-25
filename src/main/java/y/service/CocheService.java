@@ -100,7 +100,11 @@ public class CocheService {
 
     public List<CocheDTO> findByColor(String color) {
         log.debug("Request to find by atribute color: {}", color);
-        return cocheMapper.toDto(cocheRepository.findByColorIgnoreCase(color));
+        if ("".equals(color)) {
+            return cocheMapper.toDto(cocheRepository.findAll());
+        } else {
+            return cocheMapper.toDto(cocheRepository.findByColorIgnoreCase(color));
+        }
     }
 
     @Transactional(readOnly = true)
