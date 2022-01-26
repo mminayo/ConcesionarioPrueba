@@ -103,7 +103,7 @@ public class CocheService {
         if ("".equals(color)) {
             return cocheMapper.toDto(cocheRepository.findAll());
         } else {
-            return cocheMapper.toDto(cocheRepository.findByColorIgnoreCase(color));
+            return cocheMapper.toDto(cocheRepository.findByColorStartingWith(color));
         }
     }
 

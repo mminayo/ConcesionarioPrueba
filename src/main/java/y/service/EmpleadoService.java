@@ -1,5 +1,6 @@
 package y.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +74,16 @@ public class EmpleadoService {
     public Page<EmpleadoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Empleados");
         return empleadoRepository.findAll(pageable).map(empleadoMapper::toDto);
+    }
+
+    public List<EmpleadoDTO> findAllByActivoTrue() {
+        log.debug("Request to get all Active Empleados");
+        return empleadoMapper.toDto(empleadoRepository.findAllByActivoTrue());
+    }
+
+    public List<EmpleadoDTO> findAllByActivoFalse() {
+        log.debug("Request to get all Inactive Empleados");
+        return empleadoMapper.toDto(empleadoRepository.findAllByActivoFalse());
     }
 
     /**

@@ -34,23 +34,16 @@ export class EmpleadoComponent implements OnInit {
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
-
-    this.empleadoService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe({
-        next: (res: HttpResponse<IEmpleado[]>) => {
-          this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-        },
-        error: () => {
-          this.isLoading = false;
-          this.onError();
-        },
-      });
+    this.empleadoService.findAllByActiveTrue().subscribe({
+      next: (res: HttpResponse<IEmpleado[]>) => {
+        this.isLoading = false;
+        this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
   }
 
   ngOnInit(): void {
@@ -59,6 +52,45 @@ export class EmpleadoComponent implements OnInit {
 
   trackId(index: number, item: IEmpleado): number {
     return item.id!;
+  }
+
+  findAllByActive(): void {
+    this.empleadoService.findAllByActiveTrue().subscribe({
+      next: (res: HttpResponse<IEmpleado[]>) => {
+        this.isLoading = false;
+        this.empleados = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
+  }
+
+  findAllByInactive(): void {
+    this.empleadoService.findAllByActiveFalse().subscribe({
+      next: (res: HttpResponse<IEmpleado[]>) => {
+        this.isLoading = false;
+        this.empleados = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
+  }
+
+  findAllEmpleados(): void {
+    this.empleadoService.findAllEmpleados().subscribe({
+      next: (res: HttpResponse<IEmpleado[]>) => {
+        this.isLoading = false;
+        this.empleados = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
   }
 
   delete(empleado: IEmpleado): void {

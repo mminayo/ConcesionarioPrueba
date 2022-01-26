@@ -39,6 +39,18 @@ export class EmpleadoService {
     return this.http.get<IEmpleado[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  findAllByActiveTrue(): Observable<EntityArrayResponseType> {
+    return this.http.get<IEmpleado[]>(`${this.resourceUrl}/activos`, { observe: 'response' });
+  }
+
+  findAllByActiveFalse(): Observable<EntityArrayResponseType> {
+    return this.http.get<IEmpleado[]>(`${this.resourceUrl}/inactivos`, { observe: 'response' });
+  }
+
+  findAllEmpleados(): Observable<EntityArrayResponseType> {
+    return this.http.get<IEmpleado[]>(`${this.resourceUrl}`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

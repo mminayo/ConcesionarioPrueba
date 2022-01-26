@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -163,6 +163,20 @@ public class EmpleadoResource {
         log.debug("REST request to get Empleado : {}", id);
         Optional<EmpleadoDTO> empleadoDTO = empleadoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(empleadoDTO);
+    }
+
+    @GetMapping("/empleados/activos")
+    public ResponseEntity<List<EmpleadoDTO>> findAllByActivoTrue() {
+        log.debug("REST request to get Empleados activos : {}");
+        List<EmpleadoDTO> empleadosActivos = empleadoService.findAllByActivoTrue();
+        return ResponseEntity.ok().body(empleadosActivos);
+    }
+
+    @GetMapping("/empleados/inactivos")
+    public ResponseEntity<List<EmpleadoDTO>> findAllByActivoFalse() {
+        log.debug("REST request to get Empleados inactivos : {}");
+        List<EmpleadoDTO> empleadosInactivos = empleadoService.findAllByActivoFalse();
+        return ResponseEntity.ok().body(empleadosInactivos);
     }
 
     /**

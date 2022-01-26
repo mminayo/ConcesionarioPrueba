@@ -16,4 +16,5 @@ import y.domain.Coche;
 public interface CocheRepository extends JpaRepository<Coche, Long> {
     List<Coche> findByColorIgnoreCase(String color);
     List<Coche> findAllByColor(String color);
+    List<Coche> findByColorStartingWith(String color);
 }

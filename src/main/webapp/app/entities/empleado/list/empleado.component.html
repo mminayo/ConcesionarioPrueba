@@ -3,6 +3,34 @@
     <span jhiTranslate="concesionarioPruebaApp.empleado.home.title">Empleados</span>
 
     <div class="d-flex justify-content-end">
+      <button
+        id="jh-search-active"
+        data-cy="searchActiveEmployersButton"
+        class="btn btn-success jh-find-inactive find-active-empleado mr-3"
+        (click)="findAllByActive()"
+      >
+        <fa-icon icon="check"></fa-icon>
+        <span> Mostrar activos </span>
+      </button>
+      <button
+        id="jh-search-inactive"
+        data-cy="searchInactiveEmployersButton"
+        class="btn btn-danger jh-find-inactive find-inactive-empleado mr-3"
+        (click)="findAllByInactive()"
+      >
+        <fa-icon icon="lock"></fa-icon>
+        <span> Mostrar inactivos </span>
+      </button>
+      <button
+        id="jh-show-all"
+        data-cy="searchAllEmployersButton"
+        class="btn btn-info jh-find-all find-empleado mr-3"
+        (click)="findAllEmpleados()"
+      >
+        <fa-icon icon="user"></fa-icon>
+        <span>Mostrar empleados </span>
+      </button>
+
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="concesionarioPruebaApp.empleado.home.refreshListLabel">Refresh List</span>
@@ -55,7 +83,10 @@
           </td>
           <td>{{ empleado.dni }}</td>
           <td>{{ empleado.nombre }}</td>
-          <td>{{ empleado.activo }}</td>
+          <td>
+            <fa-icon *ngIf="empleado.activo === true" icon="check"></fa-icon>
+            <fa-icon *ngIf="empleado.activo === false" icon="lock"></fa-icon>
+          </td>
           <td>{{ empleado.numeroVentas }}</td>
           <td class="text-right">
             <div class="btn-group">
