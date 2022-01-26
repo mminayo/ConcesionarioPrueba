@@ -112,4 +112,10 @@ public class CocheService {
         log.debug("Request to get all coches by color: {}", color);
         return cocheRepository.findAllByColor(color);
     }
+
+    @Transactional(readOnly = true)
+    public Page<CocheDTO> getTodosPorModeloPaginados(String modelo, Pageable pageable) {
+        log.debug("Request to get all Coches");
+        return cocheRepository.cochesPaginadosPorModelo(modelo, pageable).map(cocheMapper::toDto);
+    }
 }

@@ -24,6 +24,7 @@ export class CocheComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   colorBusqueda = '';
+  modeloBusqueda = '';
 
   constructor(
     protected cocheService: CocheService,
@@ -70,6 +71,32 @@ export class CocheComponent implements OnInit {
           this.onError();
         },
       });
+    } else {
+      this.loadPage();
+    }
+  }
+
+  findAllByModelo(page?: number, dontNavigate?: boolean): void {
+    if (this.modeloBusqueda !== '') {
+      this.isLoading = true;
+      const pageToLoad: number = page ?? this.page ?? 1;
+
+      this.cocheService
+        .findAllByModelo(this.modeloBusqueda, {
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe({
+          next: (res: HttpResponse<ICoche[]>) => {
+            this.isLoading = false;
+            this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          },
+          error: () => {
+            this.isLoading = false;
+            this.onError();
+          },
+        });
     } else {
       this.loadPage();
     }

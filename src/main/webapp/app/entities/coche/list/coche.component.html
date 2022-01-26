@@ -11,6 +11,14 @@
         placeholder="Buscar coche por color"
         id="buscar"
       />
+      <input
+        class="input-group-sm mr-3"
+        type="text"
+        [(ngModel)]="modeloBusqueda"
+        (ngModelChange)="findAllByModelo()"
+        placeholder="Buscar coche por modelo"
+        id="buscar"
+      />
 
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
